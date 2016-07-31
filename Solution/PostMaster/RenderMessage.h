@@ -4,17 +4,21 @@
 #include <Matrix.h>
 #include <Vector.h>
 
+namespace Magma
+{
+	class Texture;
+}
+
 struct RenderMessage : public Message
 {
 	RenderMessage();
 
-	RenderMessage(const CU::Matrix44<float>& aOrientation, const CU::Vector3<float>& aScale
-		, Magma::ModelID aModelID, Magma::EffectID aEffectID);
+	RenderMessage(Magma::Texture* aTexture, const CU::Vector4<float>& aSizeAndHotSpot
+		, const CU::Vector4<float>& aPositionAndScale);
 
-	CU::Matrix44<float> myOrientation;
-	CU::Vector3<float> myScale;
-	Magma::ModelID myModelID;
-	Magma::EffectID myEffectID;
+	Magma::Texture* myTexture;
+	const CU::Vector4<float> mySizeAndHotSpot;
+	const CU::Vector4<float> myPositionAndScale;
 };
 
 inline RenderMessage::RenderMessage()
@@ -22,12 +26,11 @@ inline RenderMessage::RenderMessage()
 {
 }
 
-inline RenderMessage::RenderMessage(const CU::Matrix44<float>& aOrientation, const CU::Vector3<float>& aScale
-		, Magma::ModelID aModelID, Magma::EffectID aEffectID)
+inline RenderMessage::RenderMessage(Magma::Texture* aTexture, const CU::Vector4<float>& aSizeAndHotSpot
+	, const CU::Vector4<float>& aPositionAndScale)
 	: Message(eMessageType::RENDER)
-	, myOrientation(aOrientation)
-	, myScale(aScale)
-	, myModelID(aModelID)
-	, myEffectID(aEffectID)
+	, myTexture(aTexture)
+	, mySizeAndHotSpot(aSizeAndHotSpot)
+	, myPositionAndScale(aPositionAndScale)
 {
 }

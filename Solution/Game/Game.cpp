@@ -40,5 +40,5 @@ void Game::OnResize(float aWidth, float aHeight)
 
 void Game::ReceiveMessage(const RenderMessage& aMessage)
 {
-	myRendererProxy->RenderModel(aMessage.myModelID, aMessage.myEffectID, aMessage.myOrientation, aMessage.myScale);
+	myRendererProxy->RenderSprite(aMessage.myTexture, CU::Matrix44<float>(), aMessage.mySizeAndHotSpot, aMessage.myPositionAndScale);
 }
