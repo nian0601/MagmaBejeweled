@@ -5,16 +5,37 @@
     <ClInclude Include="stdafx.h">
       <Filter>Precompile</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Entity\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PositionComponent.h">
+      <Filter>Entity\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderProcessor.h">
+      <Filter>Entity\Processor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="stdafx.cpp">
       <Filter>Precompile</Filter>
     </ClCompile>
+    <ClCompile Include="RenderProcessor.cpp">
+      <Filter>Entity\Processor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Precompile">
       <UniqueIdentifier>{3c94b6b0-c318-47e6-b9dc-f30a78330a8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{2fecf64e-e80a-4b64-b598-22a634d789d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Processor">
+      <UniqueIdentifier>{3abee472-3d2f-45be-bc49-3e4052ac7dff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity\Component">
+      <UniqueIdentifier>{b1ede037-ebfb-4df8-932c-f6d237dceb1b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

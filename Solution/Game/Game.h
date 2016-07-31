@@ -5,6 +5,8 @@
 
 #include <Subscriber.h>
 
+#include <Entity/Include/World.h>
+
 namespace Magma
 {
 	class RendererProxy;
@@ -24,5 +26,7 @@ public:
 
 private:
 	Magma::RendererProxy* myRendererProxy;
+
+	Magma::World myWorld;
 };
 
