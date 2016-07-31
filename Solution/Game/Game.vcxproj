@@ -85,6 +85,9 @@
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="GemComponent.h" />
+    <ClInclude Include="InputProcessor.h" />
+    <ClInclude Include="MovementComponent.h" />
+    <ClInclude Include="MovementProcessor.h" />
     <ClInclude Include="PositionComponent.h" />
     <ClInclude Include="RenderProcessor.h" />
     <ClInclude Include="SpriteComponent.h" />
@@ -92,6 +95,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="InputProcessor.cpp" />
+    <ClCompile Include="MovementProcessor.cpp" />
     <ClCompile Include="RenderProcessor.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

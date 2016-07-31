@@ -17,6 +17,15 @@
     <ClInclude Include="GemComponent.h">
       <Filter>Entity\Component</Filter>
     </ClInclude>
+    <ClInclude Include="MovementComponent.h">
+      <Filter>Entity\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="InputProcessor.h">
+      <Filter>Entity\Processor</Filter>
+    </ClInclude>
+    <ClInclude Include="MovementProcessor.h">
+      <Filter>Entity\Processor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
@@ -24,6 +33,12 @@
       <Filter>Precompile</Filter>
     </ClCompile>
     <ClCompile Include="RenderProcessor.cpp">
+      <Filter>Entity\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="InputProcessor.cpp">
+      <Filter>Entity\Processor</Filter>
+    </ClCompile>
+    <ClCompile Include="MovementProcessor.cpp">
       <Filter>Entity\Processor</Filter>
     </ClCompile>
   </ItemGroup>

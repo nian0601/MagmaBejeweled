@@ -7,8 +7,11 @@
 #include <RenderMessage.h>
 #include <Rendering/RendererProxy.h>
 
+#include "InputProcessor.h"
 #include "RenderProcessor.h"
+#include "MovementProcessor.h"
 
+#include "GemComponent.h"
 #include "SpriteComponent.h"
 #include "PositionComponent.h"
 
@@ -28,7 +31,9 @@ void Game::Init(Magma::Engine& aEngine)
 	PostMaster::GetInstance()->Subscribe(this, eMessageType::RENDER);
 	myRendererProxy = &aEngine.GetRendererProxy();
 	
+	myWorld.AddProcessor<InputProcessor>();
 	myWorld.AddProcessor<RenderProcessor>();
+	myWorld.AddProcessor<MovementProcessor>();
 
 	for (int y = 0; y < 8; ++y)
 	{
@@ -37,27 +42,36 @@ void Game::Init(Magma::Engine& aEngine)
 			Magma::Entity entity = myWorld.CreateEntity();
 			myWorld.AddComponent<SpriteComponent>(entity);
 			myWorld.AddComponent<PositionComponent>(entity);
+			myWorld.AddComponent<GemComponent>(entity);
 
 			SpriteComponent& sprite = myWorld.GetComponent<SpriteComponent>(entity);
+			GemComponent& gem = myWorld.GetComponent<GemComponent>(entity);
+			gem.myIndex = CU::Vector2<int>(x, y);
 			switch (rand() % 5)
 			{
 			case 0:
 				sprite.myTexture = aEngine.GetAssetContainer().RequestTexture("Data/Resource/Texture/Blue.dds");
+				gem.myType = eGemType::BLUE;
 				break;
 			case 1:
 				sprite.myTexture = aEngine.GetAssetContainer().RequestTexture("Data/Resource/Texture/Green.dds");
+				gem.myType = eGemType::GREEN;
 				break;
 			case 2: 
 				sprite.myTexture = aEngine.GetAssetContainer().RequestTexture("Data/Resource/Texture/Purple.dds");
+				gem.myType = eGemType::PURPLE;
 				break;
 			case 3:
 				sprite.myTexture = aEngine.GetAssetContainer().RequestTexture("Data/Resource/Texture/Red.dds");
+				gem.myType = eGemType::RED;
 				break;
 			case 4:
 				sprite.myTexture = aEngine.GetAssetContainer().RequestTexture("Data/Resource/Texture/Yellow.dds");
+				gem.myType = eGemType::YELLOW;
 				break;
 			default:
 				sprite.myTexture = aEngine.GetAssetContainer().RequestTexture("Data/Resource/Texture/Blue.dds");
+				gem.myType = eGemType::BLUE;
 				break;
 			}
 			
