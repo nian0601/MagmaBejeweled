@@ -14,6 +14,9 @@
     <ClInclude Include="RenderProcessor.h">
       <Filter>Entity\Processor</Filter>
     </ClInclude>
+    <ClInclude Include="GemComponent.h">
+      <Filter>Entity\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />

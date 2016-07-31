@@ -27,7 +27,7 @@ void Game::Init(Magma::Engine& aEngine)
 {
 	PostMaster::GetInstance()->Subscribe(this, eMessageType::RENDER);
 	myRendererProxy = &aEngine.GetRendererProxy();
-
+	
 	myWorld.AddProcessor<RenderProcessor>();
 
 	for (int y = 0; y < 8; ++y)

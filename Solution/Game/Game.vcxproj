@@ -84,6 +84,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GemComponent.h" />
     <ClInclude Include="PositionComponent.h" />
     <ClInclude Include="RenderProcessor.h" />
     <ClInclude Include="SpriteComponent.h" />
