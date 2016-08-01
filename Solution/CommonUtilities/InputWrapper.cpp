@@ -96,6 +96,10 @@ void CU::InputWrapper::Update()
 		myMousePos.x = static_cast<float>(cursorPoint.x);
 		myMousePos.y = static_cast<float>(cursorPoint.y);
 
+		RECT windowRect;
+		GetClientRect(myWindowHandler, &windowRect);
+		myMousePos.y = windowRect.bottom - myMousePos.y;
+
 		if (myIsRecordingDeltas == false)
 		{
 			myMouseState.lX = 0;

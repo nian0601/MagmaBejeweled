@@ -7,6 +7,7 @@
 #include <InputWrapper.h>
 InputProcessor::InputProcessor(Magma::World& aWorld)
 	: Magma::BaseProcessor(aWorld, Magma::CreateFilter<Magma::Requires<GemComponent, PositionComponent>>())
+	, myFirstEntity(-1)
 {
 }
 
@@ -17,23 +18,45 @@ InputProcessor::~InputProcessor()
 
 void InputProcessor::Update(float aDelta)
 {
-	if (CU::InputWrapper::GetInstance()->KeyDown(DIK_S))
+	if (CU::InputWrapper::GetInstance()->MouseDown(0))
 	{
-		const CU::GrowingArray<Magma::Entity>& entities = GetEntities();
+		Magma::Entity clickedEntity = GetClickedEntity();
 
-		Magma::Entity first = -1;
-		Magma::Entity second = -1;
-
-		while (first == second)
+		if (myFirstEntity == -1)
 		{
-			first = rand() % entities.Size();
-			second = rand() % entities.Size();
+			myFirstEntity = clickedEntity;
 		}
+		else if (myFirstEntity != clickedEntity)
+		{
+			AddComponent<MovementComponent>(myFirstEntity);
+			AddComponent<MovementComponent>(clickedEntity);
 
-		AddComponent<MovementComponent>(first);
-		AddComponent<MovementComponent>(second);
+			GetComponent<MovementComponent>(myFirstEntity).myTargetPosition = GetComponent<PositionComponent>(clickedEntity).myPosition;
+			GetComponent<MovementComponent>(clickedEntity).myTargetPosition = GetComponent<PositionComponent>(myFirstEntity).myPosition;
 
-		GetComponent<MovementComponent>(first).myTargetPosition = GetComponent<PositionComponent>(second).myPosition;
-		GetComponent<MovementComponent>(second).myTargetPosition = GetComponent<PositionComponent>(first).myPosition;
+			myFirstEntity = -1;
+		}
 	}
+}
+
+Magma::Entity InputProcessor::GetClickedEntity()
+{
+	const CU::GrowingArray<Magma::Entity>& entities = GetEntities();
+
+	CU::Vector2<float> mousePosition = CU::InputWrapper::GetInstance()->GetMousePosition();
+
+	for each (Magma::Entity entity in entities)
+	{
+		CU::Vector2<float> position = GetComponent<PositionComponent>(entity).myPosition;
+		CU::Vector2<float> size = CU::Vector2<float>(36.f, 36.f);
+
+		if (position.x + size.x < mousePosition.x) continue;
+		if (position.x > mousePosition.x) continue;
+		if (position.y + size.y < mousePosition.y) continue;
+		if (position.y > mousePosition.y) continue;
+
+		return entity;
+	}
+
+	return -1;
 }
