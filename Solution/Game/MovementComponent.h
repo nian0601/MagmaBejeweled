@@ -7,4 +7,5 @@
 struct MovementComponent : public Magma::BaseComponent
 {
 	CU::Vector2<float> myTargetPosition;
+	CU::Vector2<int> myTargetIndex;
 };

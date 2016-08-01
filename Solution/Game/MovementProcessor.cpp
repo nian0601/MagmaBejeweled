@@ -3,9 +3,10 @@
 
 #include "MovementComponent.h"
 #include "PositionComponent.h"
+#include "GemComponent.h"
 
 MovementProcessor::MovementProcessor(Magma::World& aWorld)
-	: Magma::BaseProcessor(aWorld, Magma::CreateFilter<Magma::Requires<MovementComponent, PositionComponent>>())
+	: Magma::BaseProcessor(aWorld, Magma::CreateFilter<Magma::Requires<MovementComponent, PositionComponent, GemComponent>>())
 {
 }
 
@@ -31,6 +32,9 @@ void MovementProcessor::Update(float aDelta)
 		if (CU::Length2(newDir) < 1.f || CU::Dot(CU::GetNormalized(newDir), direction) < 0)
 		{
 			position = target;
+
+			GetComponent<GemComponent>(entity).myIndex = GetComponent<MovementComponent>(entity).myTargetIndex;
+
 			RemoveComponent<MovementComponent>(entity);
 		}
 

@@ -21,6 +21,10 @@ void InputProcessor::Update(float aDelta)
 	if (CU::InputWrapper::GetInstance()->MouseDown(0))
 	{
 		Magma::Entity clickedEntity = GetClickedEntity();
+		if (clickedEntity != -1)
+		{
+			return;
+		}
 
 		if (myFirstEntity == -1)
 		{
@@ -28,11 +32,20 @@ void InputProcessor::Update(float aDelta)
 		}
 		else if (myFirstEntity != clickedEntity)
 		{
-			AddComponent<MovementComponent>(myFirstEntity);
-			AddComponent<MovementComponent>(clickedEntity);
+			if (IsAdjacent(myFirstEntity, clickedEntity))
+			{
+				AddComponent<MovementComponent>(myFirstEntity);
+				AddComponent<MovementComponent>(clickedEntity);
 
-			GetComponent<MovementComponent>(myFirstEntity).myTargetPosition = GetComponent<PositionComponent>(clickedEntity).myPosition;
-			GetComponent<MovementComponent>(clickedEntity).myTargetPosition = GetComponent<PositionComponent>(myFirstEntity).myPosition;
+				MovementComponent& firstMovement = GetComponent<MovementComponent>(myFirstEntity);
+				MovementComponent& secondMovement = GetComponent<MovementComponent>(clickedEntity);
+
+				firstMovement.myTargetPosition = GetComponent<PositionComponent>(clickedEntity).myPosition;
+				secondMovement.myTargetPosition = GetComponent<PositionComponent>(myFirstEntity).myPosition;
+
+				firstMovement.myTargetIndex = GetComponent<GemComponent>(clickedEntity).myIndex;
+				secondMovement.myTargetIndex = GetComponent<GemComponent>(myFirstEntity).myIndex;
+			}
 
 			myFirstEntity = -1;
 		}
@@ -59,4 +72,20 @@ Magma::Entity InputProcessor::GetClickedEntity()
 	}
 
 	return -1;
+}
+
+bool InputProcessor::IsAdjacent(Magma::Entity aFirstEntity, Magma::Entity aSecondEntity)
+{
+	CU::Vector2<int> firstIndex = GetComponent<GemComponent>(aFirstEntity).myIndex;
+	CU::Vector2<int> secondIndex = GetComponent<GemComponent>(aSecondEntity).myIndex;
+
+	CU::Vector2<int> diff = firstIndex - secondIndex;
+
+	if ((abs(diff.x) == 1 && abs(diff.y) == 0)
+		|| abs(diff.x) == 0 && abs(diff.y) == 1)
+	{
+		return true;
+	}
+
+	return false;
 }

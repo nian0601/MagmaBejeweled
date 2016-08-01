@@ -13,6 +13,8 @@ public:
 
 private:
 	Magma::Entity GetClickedEntity();
+	bool IsAdjacent(Magma::Entity aFirstEntity, Magma::Entity aSecondEntity);
+
 	Magma::Entity myFirstEntity;
 };
 
