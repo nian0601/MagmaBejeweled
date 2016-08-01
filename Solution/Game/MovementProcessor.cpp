@@ -25,9 +25,10 @@ void MovementProcessor::Update(float aDelta)
 
 		CU::Vector2<float> direction = CU::GetNormalized(target - position);
 
-		position += direction * 25.f * aDelta;
+		position += direction * 100.f * aDelta;
 
-		if (CU::Length2(position - target) < 1.f)
+		CU::Vector2<float> newDir = target - position;
+		if (CU::Length2(newDir) < 1.f || CU::Dot(CU::GetNormalized(newDir), direction) < 0)
 		{
 			position = target;
 			RemoveComponent<MovementComponent>(entity);
