@@ -15,6 +15,8 @@
 #include "SpriteComponent.h"
 #include "PositionComponent.h"
 
+#include "TestEvent.h"
+
 Game::Game()
 {
 }
@@ -97,6 +99,7 @@ bool Game::Update(float aDelta)
 
 	myWorld.Update(aDelta);
 
+	myWorld.SendEvent(TestEvent());
 	return true;
 }
 

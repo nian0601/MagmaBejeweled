@@ -26,6 +26,9 @@
     <ClInclude Include="MovementProcessor.h">
       <Filter>Entity\Processor</Filter>
     </ClInclude>
+    <ClInclude Include="TestEvent.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />

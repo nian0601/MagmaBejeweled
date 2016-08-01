@@ -83,6 +83,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="TestEvent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GemComponent.h" />
     <ClInclude Include="InputProcessor.h" />

@@ -1,10 +1,12 @@
 #include "stdafx.h"
 #include "InputProcessor.h"
+#include <InputWrapper.h>
 #include "GemComponent.h"
 #include "MovementComponent.h"
 #include "PositionComponent.h"
 
-#include <InputWrapper.h>
+#include "TestEvent.h"
+
 InputProcessor::InputProcessor(Magma::World& aWorld)
 	: Magma::BaseProcessor(aWorld, Magma::CreateFilter<Magma::Requires<GemComponent, PositionComponent>>())
 	, myFirstEntity(static_cast<unsigned int>(-1))
@@ -50,6 +52,11 @@ void InputProcessor::Update(float)
 			myFirstEntity = static_cast<unsigned int>(-1);
 		}
 	}
+}
+
+void InputProcessor::OnEvent(const Magma::Event& aEvent)
+{
+	const TestEvent* event = static_cast<const TestEvent*>(&aEvent);
 }
 
 Magma::Entity InputProcessor::GetClickedEntity()

@@ -11,6 +11,7 @@ public:
 
 	void Update(float aDelta) override;
 
+	void OnEvent(const Magma::Event& aEvent) override;
 private:
 	Magma::Entity GetClickedEntity();
 	bool IsAdjacent(Magma::Entity aFirstEntity, Magma::Entity aSecondEntity);
