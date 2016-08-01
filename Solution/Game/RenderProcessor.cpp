@@ -19,7 +19,7 @@ RenderProcessor::~RenderProcessor()
 {
 }
 
-void RenderProcessor::Update(float aDelta)
+void RenderProcessor::Update(float)
 {
 	const CU::GrowingArray<Magma::Entity>& entities = GetEntities();
 
