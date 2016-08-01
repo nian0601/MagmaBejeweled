@@ -7,7 +7,7 @@
 #include <InputWrapper.h>
 InputProcessor::InputProcessor(Magma::World& aWorld)
 	: Magma::BaseProcessor(aWorld, Magma::CreateFilter<Magma::Requires<GemComponent, PositionComponent>>())
-	, myFirstEntity(-1)
+	, myFirstEntity(static_cast<unsigned int>(-1))
 {
 }
 
@@ -16,12 +16,12 @@ InputProcessor::~InputProcessor()
 {
 }
 
-void InputProcessor::Update(float aDelta)
+void InputProcessor::Update(float)
 {
 	if (CU::InputWrapper::GetInstance()->MouseDown(0))
 	{
 		Magma::Entity clickedEntity = GetClickedEntity();
-		if (clickedEntity != -1)
+		if (clickedEntity == -1)
 		{
 			return;
 		}
@@ -47,7 +47,7 @@ void InputProcessor::Update(float aDelta)
 				secondMovement.myTargetIndex = GetComponent<GemComponent>(myFirstEntity).myIndex;
 			}
 
-			myFirstEntity = -1;
+			myFirstEntity = static_cast<unsigned int>(-1);
 		}
 	}
 }
@@ -71,7 +71,7 @@ Magma::Entity InputProcessor::GetClickedEntity()
 		return entity;
 	}
 
-	return -1;
+	return static_cast<Magma::Entity>(-1);
 }
 
 bool InputProcessor::IsAdjacent(Magma::Entity aFirstEntity, Magma::Entity aSecondEntity)
